@@ -1,0 +1,15 @@
+.messages-output {
+  height: 80vh;
+  border: 0.1rem solid lightgray;
+  overflow-y: hidden;
+  margin-bottom: 1.2rem;
+  margin-top: 0.8rem;
+  border-radius: 0.5rem;
+}
+.btn-message {
+  background-color: #ff8a65;
+  border: none;
+}
+.btn-message:hover {
+  background-color: #ff7043;
+}
