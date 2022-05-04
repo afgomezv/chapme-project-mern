@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useSignupUserMutation } from "../services/appApi";
+import { Link, useNavigate } from "react-router-dom";
 import { FcPlus } from "react-icons/fc";
 import "./Signup.css";
 
@@ -8,6 +9,8 @@ const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [signupUser, { isLoading, error }] = useSignupUserMutation();
+  const navigate = useNavigate();
 
   //image upload states
   const [image, setImage] = useState(null);
@@ -51,7 +54,14 @@ const Signup = () => {
     if (!image) return alert("Por favor cargar una imagen en tu perfil");
     const url = await uploadImage(image);
     console.log(url);
+
     //signup the user
+    signupUser({ name, email, password, picture: url }).then(({ data }) => {
+      if (data) {
+        console.log(data);
+        navigate("/chat");
+      }
+    });
   };
 
   return (
