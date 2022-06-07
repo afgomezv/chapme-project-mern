@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Spinner } from "react-bootstrap";
 import { useLoginUserMutation } from "../services/appApi";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
@@ -31,6 +31,7 @@ const Login = () => {
         <Col md={6} className="login__form ">
           <Form className="login__form-box" onSubmit={handleLogin}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
+              {error && <p className="alert alert-danger">{error.data}</p>}
               <Form.Label>Correo Electrónico</Form.Label>
               <Form.Control
                 type="email"
@@ -39,7 +40,7 @@ const Login = () => {
                 required
               />
               <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
+                Nunca compartiremos tu correo electrónico
               </Form.Text>
             </Form.Group>
 
@@ -57,7 +58,7 @@ const Login = () => {
               controlId="formBasicCheckbox"
             ></Form.Group>
             <Button variant="primary" type="submit">
-              Ingresar
+              {isLoading ? <Spinner animation="grow" /> : "Ingresar"}
             </Button>
             <div className="py-4">
               <p className="text-center">

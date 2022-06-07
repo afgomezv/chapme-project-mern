@@ -86,6 +86,8 @@ const Signup = () => {
               onChange={validateImg}
             />
           </div>
+
+          {error && <p className="alert alert-danger">{error.data}</p>}
           <Form className="login__form-box" onSubmit={handleSignup}>
             <Form.Group className="mb-3" controlId="formBasicName">
               <Form.Label>Nombre</Form.Label>
@@ -121,7 +123,7 @@ const Signup = () => {
               controlId="formBasicCheckbox"
             ></Form.Group>
             <Button variant="primary" type="submit">
-              {uploadingImg ? "Registrandose...." : "Registrar"}
+              {uploadingImg || isLoading ? "Registrandose...." : "Registrar"}
             </Button>
             <div className="py-4">
               <p className="text-center">
